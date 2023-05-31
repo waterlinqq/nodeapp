@@ -1,13 +1,13 @@
-var http = require("http");
+require('./env')
+const express = require('express');
+const app = express();
 
-var port = 4000;
-
-var server = http.createServer(function (request, response) {
-  console.log(123);
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.end("Hello World");
-});
-
-server.listen(port);
-
-console.log("Server running at http://localhost:" + port);
+app.get('/env', function (req, res) {
+    console.log(process.env)
+    res.send(process.env.NODE_ENV)
+})
+app.get('/', function (req, res) {
+    res.send('Hello')
+})
+const port = 3000;
+app.listen(port);
